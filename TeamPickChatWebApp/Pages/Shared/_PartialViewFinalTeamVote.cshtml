@@ -1,0 +1,61 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Message Response</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @@keyframes countdown {
+    from { width: 100%; }
+    to { width: 0; }
+  }
+</style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center h-screen">
+
+<div class="flex flex-col items-center">
+  <div class="relative w-32 h-32 mb-4">
+    <div id="timer" class="absolute bg-red-500 h-2 bottom-0" style="animation: countdown 30s linear;"></div>
+  </div>
+  <div id="message" class="bg-white p-4 rounded shadow mb-4">
+    <p>You have 30 seconds to respond.</p>
+  </div>
+  <div class="flex">
+    <button id="noButton" class="bg-red-500 text-white px-4 py-2 rounded-l hover:bg-red-700 transition-colors">No</button>
+    <button id="yesButton" class="bg-green-500 text-white px-4 py-2 rounded-r hover:bg-green-700 transition-colors">Yes</button>
+  </div>
+</div>
+
+<script>
+  const timerElement = document.getElementById('timer');
+  const messageElement = document.getElementById('message');
+  const noButton = document.getElementById('noButton');
+  const yesButton = document.getElementById('yesButton');
+
+  let timeLeft = 30; // 30 seconds countdown
+
+  const countdown = setInterval(() => {
+    timeLeft--;
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      messageElement.innerHTML = '<p>Time is up!</p>';
+    }
+  }, 1000);
+
+  noButton.addEventListener('click', () => {
+    clearInterval(countdown);
+    messageElement.innerHTML = '<p>You answered No.</p>';
+    timerElement.style.animationPlayState = 'paused';
+  });
+
+  yesButton.addEventListener('click', () => {
+    clearInterval(countdown);
+    messageElement.innerHTML = '<p>You answered Yes.</p>';
+    timerElement.style.animationPlayState = 'paused';
+  });
+</script>
+
+</body>
+</html>

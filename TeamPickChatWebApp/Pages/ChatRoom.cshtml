@@ -77,6 +77,13 @@
                 @Html.Partial("Shared/_PartialViewCaptainPick.cshtml")
             }
     </div>
+
+    <div>
+            @if (@Model.Title == "sugus")
+            {
+                @Html.Partial("Shared/_PartialViewFinalTeamVote.cshtml")
+            }
+    </div>
 </div>
 
 <style>
