@@ -2,25 +2,14 @@
 
 @model TeamPickChatWebApp.Pages.ChatRoomModel
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Messaging App</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Additional custom styles can be added here */
-        .bg-blur {
-            background-image: url('https://source.unsplash.com/featured/?nature');
-            background-size: cover;
-            background-position: center;
-            backdrop-filter: blur(8px);
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>    
 </head>
-<body class="bg-blur flex items-center justify-center h-screen">
 
+<div class="bg-blur min-h-screen bg-gray-100 flex flex-col justify-center items-center">
     <div class="container mx-auto p-4">
         <div class="bg-white rounded-lg shadow">
             <div class="border-b p-3">
@@ -80,38 +69,60 @@
         </div>
     </div>
 
-    <script>
-        // JavaScript for interactive features
-        document.getElementById('sendButton').addEventListener('click', function () {
-            const messageInput = document.getElementById('messageInput');
-            const chat = document.getElementById('chat');
-            const messageText = messageInput.value.trim();
+    
 
-            if (messageText) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('flex', 'items-end', 'space-x-4');
-                messageElement.innerHTML = `
-                <div class="flex-shrink-0 h-10 w-10">
-                  <img class="h-10 w-10 rounded-full" src="https://source.unsplash.com/random/100x100?face" alt="Avatar">
-                </div>
-                <div class="ml-4">
-                  <div class="text-sm text-gray-500">You</div>
-                  <div class="mt-1 text-sm text-gray-700">${messageText}</div>
-                </div>
-              `;
-                chat.appendChild(messageElement);
-                messageInput.value = '';
-                chat.scrollTop = chat.scrollHeight;
+    <div class="captain-view">
+            @if (@Model.Title == "sugus")
+            {
+                @Html.Partial("Shared/_PartialViewCaptainPick.cshtml")
             }
-        });
+    </div>
+</div>
 
-        // Pressing Enter to send message
-        document.getElementById('messageInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                document.getElementById('sendButton').click();
-            }
-        });
-    </script>
+<style>
+    /* Additional custom styles can be added here */
+    .bg-blur {
+        background-image: url('https://source.unsplash.com/featured/?nature');
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(8px);
+    }
 
-</body>
-</html>
+    .captain-view {
+        margin-top: 120px;
+    }
+}
+</style>
+
+<script>
+    // JavaScript for interactive features
+    document.getElementById('sendButton').addEventListener('click', function () {
+        const messageInput = document.getElementById('messageInput');
+        const chat = document.getElementById('chat');
+        const messageText = messageInput.value.trim();
+
+        if (messageText) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('flex', 'items-end', 'space-x-4');
+            messageElement.innerHTML = `
+                    <div class="flex-shrink-0 h-10 w-10">
+                      <img class="h-10 w-10 rounded-full" src="https://source.unsplash.com/random/100x100?face" alt="Avatar">
+                    </div>
+                    <div class="ml-4">
+                      <div class="text-sm text-gray-500">You</div>
+                      <div class="mt-1 text-sm text-gray-700">${messageText}</div>
+                    </div>
+                  `;
+            chat.appendChild(messageElement);
+            messageInput.value = '';
+            chat.scrollTop = chat.scrollHeight;
+        }
+    });
+
+    // Pressing Enter to send message
+    document.getElementById('messageInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            document.getElementById('sendButton').click();
+        }
+    });
+</script>
